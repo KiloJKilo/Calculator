@@ -6,7 +6,6 @@ import com.kevinjkahl.calculator.view.View;
 
 public class Calculator {
 
-	@SuppressWarnings ( "unused" )
 	public static void main( String[] args ) {
 
 		// create new model, view and controller
