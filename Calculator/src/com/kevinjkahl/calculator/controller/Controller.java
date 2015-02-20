@@ -30,9 +30,9 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 	}
 
-//	public Controller() {
-//		// no argument constructor
-//	}
+	public Controller() {
+		// no argument constructor
+	}
 
 	// this method handles the mouse click events from view
 	@Override

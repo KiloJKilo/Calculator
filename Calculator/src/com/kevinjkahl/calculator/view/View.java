@@ -10,16 +10,15 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import com.kevinjkahl.calculator.controller.Controller;
-import com.kevinjkahl.calculator.model.Model;
 
 public class View extends KeyAdapter {
 
 	private JFrame frame;
 	// private JTextField txfDisplay; TODO: Remove txtField display and all references
-	private Model model;
-	private Controller controller;
 	private JLabel lblDisplay;
 	private JButton btnMultiplication;
 	private JButton btnDivision;
@@ -43,12 +42,6 @@ public class View extends KeyAdapter {
 	private JButton btnVoidB;
 	private JButton btnVoidC;
 	private JButton btnVoidD;
-
-	public View( Model model, Controller controller ) {
-		this.model = model;
-		this.controller = controller;
-
-	}
 
 	public void CalcView() {
 		EventQueue.invokeLater( new Runnable() {
@@ -76,7 +69,7 @@ public class View extends KeyAdapter {
 		frame.setBounds( 100, 100, 450, 300 );
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		frame.getContentPane().setLayout( null );
-		frame.addKeyListener( controller );
+		frame.addKeyListener( new Controller() );
 		frame.setFocusable( true );
 
 		lblDisplay = new JLabel();
@@ -85,92 +78,92 @@ public class View extends KeyAdapter {
 		lblDisplay.setBorder( BorderFactory.createLineBorder( Color.blue ) );
 
 		btnMultiplication = new JButton( "*" );
-		btnMultiplication.addActionListener( controller );
+		btnMultiplication.addActionListener( new Controller() );
 		btnMultiplication.setBounds( 258, 63, 41, 23 );
 		frame.getContentPane().add( btnMultiplication );
 
 		btnDivision = new JButton( "/" );
-		btnDivision.addActionListener( controller );
+		btnDivision.addActionListener( new Controller() );
 		btnDivision.setBounds( 212, 63, 41, 23 );
 		frame.getContentPane().add( btnDivision );
 
 		btnAddition = new JButton( "+" );
-		btnAddition.addActionListener( controller );
+		btnAddition.addActionListener( new Controller() );
 		btnAddition.setBounds( 304, 90, 43, 51 );
 		frame.getContentPane().add( btnAddition );
 
 		btnSubtraction = new JButton( "-" );
-		btnSubtraction.addActionListener( controller );
+		btnSubtraction.addActionListener( new Controller() );
 		btnSubtraction.setBounds( 304, 63, 43, 23 );
 		frame.getContentPane().add( btnSubtraction );
 
 		btnEquals = new JButton( "=" );
-		btnEquals.addActionListener( controller );
+		btnEquals.addActionListener( new Controller() );
 		btnEquals.setBounds( 304, 146, 43, 51 );
 		frame.getContentPane().add( btnEquals );
 
 		btnZero = new JButton( "0" );
-		btnZero.addActionListener( controller );
+		btnZero.addActionListener( new Controller() );
 		btnZero.setBounds( 167, 174, 86, 23 );
 		frame.getContentPane().add( btnZero );
 
 		btnOne = new JButton( "1" );
-		btnOne.addActionListener( controller );
+		btnOne.addActionListener( new Controller() );
 		btnOne.setBounds( 166, 146, 41, 23 );
 		frame.getContentPane().add( btnOne );
 
 		btnTwo = new JButton( "2" );
-		btnTwo.addActionListener( controller );
+		btnTwo.addActionListener( new Controller() );
 		btnTwo.setBounds( 212, 146, 41, 23 );
 		frame.getContentPane().add( btnTwo );
 
 		btnThree = new JButton( "3" );
-		btnThree.addActionListener( controller );
+		btnThree.addActionListener( new Controller() );
 		btnThree.setBounds( 258, 146, 41, 23 );
 		frame.getContentPane().add( btnThree );
 
 		btnFour = new JButton( "4" );
-		btnFour.addActionListener(controller );
+		btnFour.addActionListener( new Controller() );
 		btnFour.setBounds( 166, 118, 41, 23 );
 		frame.getContentPane().add( btnFour );
 
 		btnFive = new JButton( "5" );
-		btnFive.addActionListener(controller );
+		btnFive.addActionListener( new Controller() );
 		btnFive.setBounds( 212, 118, 41, 23 );
 		frame.getContentPane().add( btnFive );
 
 		btnSix = new JButton( "6" );
-		btnSix.addActionListener( controller );
+		btnSix.addActionListener( new Controller() );
 		btnSix.setBounds( 258, 118, 41, 23 );
 		frame.getContentPane().add( btnSix );
 
 		btnSeven = new JButton( "7" );
-		btnSeven.addActionListener( controller );
+		btnSeven.addActionListener( new Controller() );
 		btnSeven.setBounds( 166, 90, 41, 23 );
 		frame.getContentPane().add( btnSeven );
 
 		btnEight = new JButton( "8" );
-		btnEight.addActionListener( controller );
+		btnEight.addActionListener( new Controller() );
 		btnEight.setBounds( 212, 90, 41, 23 );
 		frame.getContentPane().add( btnEight );
 
 		btnNine = new JButton( "9" );
-		btnNine.addActionListener( controller );
+		btnNine.addActionListener( new Controller() );
 		btnNine.setBounds( 258, 90, 41, 23 );
 		frame.getContentPane().add( btnNine );
 
 		btnDecimal = new JButton( "." );
-		btnDecimal.addActionListener( controller );
+		btnDecimal.addActionListener( new Controller() );
 		btnDecimal.setBounds( 258, 174, 41, 23 );
 		frame.getContentPane().add( btnDecimal );
 
 		btnC = new JButton( "C" );
-		btnC.addActionListener( controller );
+		btnC.addActionListener( new Controller() );
 		btnC.setBounds( 166, 63, 41, 23 );
 		frame.getContentPane().add( btnC );
 
 		btnCe = new JButton( "CE" );
-		btnCe.addActionListener( controller );
+		btnCe.addActionListener( new Controller() );
 		btnCe.setBounds( 113, 63, 48, 23 );
 		frame.getContentPane().add( btnCe );
 
@@ -228,8 +221,8 @@ public class View extends KeyAdapter {
 	// method to handle key events
 	private void keyPressed( KeyEvent e, Controller controller ) {
 		// Controller controller = new Controller();
-		toggleBorder( e.getKeyChar(), true );
-		// controller.keyPressed( e );
+//		toggleBorder( e.getKeyChar(), true );
+		controller.keyPressed( e );
 	}
 
 	public void keyReleased( KeyEvent e ) {
@@ -238,7 +231,7 @@ public class View extends KeyAdapter {
 
 	// method to toggle the outline border.
 	public void toggleBorder( char entry, boolean border ) {
-
+		
 		switch ( entry ) {
 		case '\n':
 			System.out.println( "Equals" );
@@ -257,11 +250,11 @@ public class View extends KeyAdapter {
 			break;
 		case '1':
 			if ( border = true ) {
-				btnOne.setBorder( BorderFactory.createLineBorder( Color.blue ) );
+				btnOne.setBorder(BorderFactory.createLineBorder(Color.blue));	
 			} else {
 				btnOne.setBorder( BorderFactory.createLineBorder( Color.blue ) );
 			}
-
+			
 			break;
 		case '2':
 			System.out.println( "2" );
