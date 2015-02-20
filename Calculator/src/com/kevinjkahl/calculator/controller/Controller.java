@@ -30,11 +30,11 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 	}
 
-	public Controller() {
-		// no argument constructor
-	}
+//	public Controller() {
+//		// no argument constructor
+//	}
 
-	// this method handles the button press events from view
+	// this method handles the mouse click events from view
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 		switch ( e.getActionCommand() ) {
@@ -94,7 +94,7 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 	// method to handle key events
 	public void keyPressed( KeyEvent e ) {
-//TODO: send each key event to the action listener or the respective method for the key/number
+		// TODO: send each key event to the action listener or the respective method for the key/number
 		char key = e.getKeyChar();
 
 		switch ( key ) {
@@ -115,6 +115,8 @@ public class Controller extends KeyAdapter implements ActionListener {
 			break;
 		case '1':
 			System.out.println( "1" );
+			// view.btnOne.setBorder(BorderFactory.createLineBorder(Color.blue));
+			view.toggleBorder( '1', true );
 			break;
 		case '2':
 			System.out.println( "2" );
@@ -141,7 +143,7 @@ public class Controller extends KeyAdapter implements ActionListener {
 			System.out.println( "9" );
 			break;
 		case 'c':
-		    System.out.println( "Clear" );
+			System.out.println( "Clear" );
 			break;
 		case '':
 			System.out.println( "Clear Everything" );
