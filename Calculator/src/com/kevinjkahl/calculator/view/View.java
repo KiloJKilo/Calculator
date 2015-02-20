@@ -3,6 +3,8 @@ package com.kevinjkahl.calculator.view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,7 +15,7 @@ import javax.swing.SwingConstants;
 
 import com.kevinjkahl.calculator.controller.Controller;
 
-public class View {
+public class View extends KeyAdapter {
 
 	private JFrame frame;
 	private JTextField txfDisplay;
@@ -45,7 +47,7 @@ public class View {
 		frame.setBounds( 100, 100, 450, 300 );
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		frame.getContentPane().setLayout( null );
-		// frame.addKeyListener( new Controller() );
+		frame.addKeyListener( new Controller() );
 		frame.setFocusable( true );
 
 		JButton btnAddition = new JButton( "+" );
@@ -195,7 +197,12 @@ public class View {
 
 	}
 
-	
+	// method to handle key events
+	public void keyPressed( KeyEvent e ) {
+		Controller controller = new Controller();
+		controller.keyPressed( e );
+	}
+
 	// public void registerListener(Controller controller) {
 	// Component[] components = frame.getContentPane().getComponents();
 	// for (Component component : components) {

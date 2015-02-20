@@ -2,11 +2,13 @@ package com.kevinjkahl.calculator.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import com.kevinjkahl.calculator.model.Model;
 import com.kevinjkahl.calculator.view.View;
 
-public class Controller implements ActionListener {
+public class Controller extends KeyAdapter implements ActionListener {
 
 	// The model of this MVC implementation of a calculator.
 	private Model model;
@@ -29,10 +31,10 @@ public class Controller implements ActionListener {
 	}
 
 	public Controller() {
-		//no argument constructor
+		// no argument constructor
 	}
 
-	//this method handles the button press events from view
+	// this method handles the button press events from view
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 		switch ( e.getActionCommand() ) {
@@ -88,6 +90,22 @@ public class Controller implements ActionListener {
 			break;
 		}
 
+	}
+
+	// method to handle key events
+	public void keyPressed( KeyEvent e ) {
+
+		char key = e.getKeyChar();
+
+		switch ( key ) {
+		case '1':
+			System.out.println( "1" );
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 
 }
