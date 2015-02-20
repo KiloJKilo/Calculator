@@ -3,7 +3,6 @@ package com.kevinjkahl.calculator.view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.KeyboardFocusManager;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -171,10 +170,6 @@ public class View {
 		frame.getContentPane().add( lblDisplay );
 		lblDisplay.setBorder( BorderFactory.createLineBorder( Color.blue ) );
 
-		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-		// manager.addKeyEventDispatcher( new MyDispatcher() );
-		manager.addKeyEventDispatcher( new Controller() );
-
 	}
 
 	// method used to update the display
@@ -200,24 +195,7 @@ public class View {
 
 	}
 
-	// method used to handle keystrokes
-	// private class MyDispatcher implements KeyEventDispatcher {
-	//
-	// @Override
-	// public boolean dispatchKeyEvent( KeyEvent e ) {
-	// if ( e.getID() == KeyEvent.KEY_PRESSED ) {
-	// // update display
-	// // calculate
-	// System.out.println( e.getKeyChar() );
-	// // } else if ( e.getID() == KeyEvent.KEY_RELEASED ) {
-	// // System.out.println( "2test2" );
-	// // } else if ( e.getID() == KeyEvent.KEY_TYPED ) {
-	// // System.out.println( "3test3" );
-	// }
-	// return false;
-	// }TODO: Delete
-	// }
-
+	
 	// public void registerListener(Controller controller) {
 	// Component[] components = frame.getContentPane().getComponents();
 	// for (Component component : components) {
