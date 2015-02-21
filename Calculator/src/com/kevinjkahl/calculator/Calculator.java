@@ -4,6 +4,12 @@ import com.kevinjkahl.calculator.controller.Controller;
 import com.kevinjkahl.calculator.model.Model;
 import com.kevinjkahl.calculator.view.View;
 
+/**
+ * 
+ * 
+ * @author Kevin Kahl
+ */
+
 public class Calculator {
 
 	public static void main( String[] args ) {
