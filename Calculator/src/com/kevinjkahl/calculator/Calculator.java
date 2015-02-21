@@ -20,7 +20,7 @@ public class Calculator {
 		Controller theController = new Controller( theModel, theView );
 
 		/* register controller as listener */
-		//theView.registerListener( theController );
+		theView.setController( theController );
 
 		/* start it up */
 		theView.CalcView();
