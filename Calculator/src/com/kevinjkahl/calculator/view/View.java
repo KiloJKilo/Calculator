@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 
 import com.kevinjkahl.calculator.controller.Controller;
 import com.kevinjkahl.calculator.model.Model;
+
 import javax.swing.JPanel;
 
 public class View extends KeyAdapter {
@@ -306,14 +308,16 @@ public class View extends KeyAdapter {
 
 	}
 
-	public void setController( Controller theController ) {
+	public void setController( ActionListener theController ) {
 		Component[] components = frame.getContentPane().getComponents();
 		for ( Component component : components ) {
-			if ( component instanceof AbstractButton ) {
-				AbstractButton button = ( AbstractButton ) component;
+			if ( component instanceof JButton ) {
+				JButton button = ( JButton ) component;
 				button.addActionListener( theController );
 			}
 		}
+
+		// btnOne.addActionListener( theController );
 
 	}
 }
