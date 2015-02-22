@@ -5,18 +5,16 @@ import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import com.kevinjkahl.calculator.controller.Controller;
 
-public class View extends KeyAdapter {
+public class View {
 
 	private JFrame frame;
 	// private JTextField txfDisplay; TODO: Remove txtField display and all references
@@ -46,18 +44,12 @@ public class View extends KeyAdapter {
 	private JButton btnVoidC;
 	private JButton btnVoidD;
 
-	// public View( Model model, Controller controller ) {
-	// this.model = model;
-	// this.controller = controller;
-	//
-	// }
-
 	public void CalcView() {
 		EventQueue.invokeLater( new Runnable() {
 
 			public void run() {
 				try {
-					//View window = new View();
+					// View window = new View();
 					frame.setVisible( true );
 				} catch ( Exception e ) {
 					e.printStackTrace();
@@ -80,6 +72,9 @@ public class View extends KeyAdapter {
 		frame.getContentPane().setLayout( null );
 		// frame.addKeyListener( controller );
 		frame.setFocusable( true );
+
+		// InputMap im = frame.getRootPane().getInputMap(JComponent.WHEN_FOCUSED);
+		// ActionMap am = frame.getRootPane().getActionMap();
 
 		lblDisplay = new JLabel();
 		lblDisplay.setBounds( 115, 208, 232, 32 );
@@ -179,10 +174,6 @@ public class View extends KeyAdapter {
 		btnVoidD.setBounds( 113, 174, 48, 23 );
 		frame.getContentPane().add( btnVoidD );
 
-		JPanel panel = new JPanel();
-		panel.setBounds( 10, 11, 422, 251 );
-		frame.getContentPane().add( panel );
-
 		// txfDisplay = new JTextField( null );
 		// txfDisplay.setHorizontalAlignment( SwingConstants.RIGHT );
 		// txfDisplay.setBounds( 113, 25, 234, 32 );
@@ -192,8 +183,9 @@ public class View extends KeyAdapter {
 	}
 
 	// method used to update the display
-	private void updateDisplay( String entry ) {
+	public void updateDisplay( String entry ) {
 		// TODO: clean up changeover from text box to label
+		//TODO: Address weather this belongs in the view or the controller
 
 		// Acquire the text that is currently shown in display
 		// String currentText = txfDisplay.getText();
@@ -214,16 +206,6 @@ public class View extends KeyAdapter {
 
 	}
 
-	// method to handle key events
-	private void keyPressed( KeyEvent e, Controller controller ) {
-		// Controller controller = new Controller();
-		// toggleBorder( e.getKeyChar(), true );
-		controller.keyPressed( e );
-	}
-
-	public void keyReleased( KeyEvent e ) {
-
-	}
 
 	// method to toggle the outline border.
 	public void toggleBorder( char entry, boolean border ) {

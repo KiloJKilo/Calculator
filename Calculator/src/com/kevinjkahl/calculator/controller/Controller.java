@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.Action;
+
 import com.kevinjkahl.calculator.model.Model;
 import com.kevinjkahl.calculator.view.View;
 
@@ -33,7 +35,9 @@ public class Controller extends KeyAdapter implements ActionListener {
 	// this method handles the mouse click events from view
 	@Override
 	public void actionPerformed( ActionEvent e ) {
-		switch ( e.getActionCommand() ) {
+		String cmd = e.getActionCommand();
+		view.updateDisplay( cmd );
+		switch ( cmd ) {
 		case "=":
 			System.out.println( "Equals" );
 			break;
@@ -150,8 +154,9 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 	}
 	
-	public void controllerVisibilityTest(){
-		System.out.println( "Test" );
+	public Action test(String key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
