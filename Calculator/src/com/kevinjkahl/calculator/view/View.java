@@ -60,8 +60,8 @@ public class View extends KeyAdapter {
 
 			public void run() {
 				try {
-					View window = new View();
-					window.frame.setVisible( true );
+					//View window = new View();
+					frame.setVisible( true );
 				} catch ( Exception e ) {
 					e.printStackTrace();
 				}
@@ -316,8 +316,5 @@ public class View extends KeyAdapter {
 				button.addActionListener( theController );
 			}
 		}
-
-		// btnOne.addActionListener( theController );
-
 	}
 }
