@@ -8,16 +8,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import com.kevinjkahl.calculator.controller.Controller;
-import com.kevinjkahl.calculator.model.Model;
-
-import javax.swing.JPanel;
 
 public class View extends KeyAdapter {
 
@@ -90,27 +87,22 @@ public class View extends KeyAdapter {
 		lblDisplay.setBorder( BorderFactory.createLineBorder( Color.blue ) );
 
 		btnMultiplication = new JButton( "*" );
-		// btnMultiplication.addActionListener( controller );
 		btnMultiplication.setBounds( 258, 63, 41, 23 );
 		frame.getContentPane().add( btnMultiplication );
 
 		btnDivision = new JButton( "/" );
-		// btnDivision.addActionListener( controller );
 		btnDivision.setBounds( 212, 63, 41, 23 );
 		frame.getContentPane().add( btnDivision );
 
 		btnAddition = new JButton( "+" );
-		// btnAddition.addActionListener( controller );
 		btnAddition.setBounds( 304, 90, 43, 51 );
 		frame.getContentPane().add( btnAddition );
 
 		btnSubtraction = new JButton( "-" );
-		// btnSubtraction.addActionListener( controller );
 		btnSubtraction.setBounds( 304, 63, 43, 23 );
 		frame.getContentPane().add( btnSubtraction );
 
 		btnEquals = new JButton( "=" );
-		// btnEquals.addActionListener( controller );
 		btnEquals.setBounds( 304, 146, 43, 51 );
 		frame.getContentPane().add( btnEquals );
 
@@ -120,62 +112,50 @@ public class View extends KeyAdapter {
 		frame.getContentPane().add( btnZero );
 
 		btnOne = new JButton( "1" );
-		// btnOne.addActionListener( controller );
 		btnOne.setBounds( 166, 146, 41, 23 );
 		frame.getContentPane().add( btnOne );
 
 		btnTwo = new JButton( "2" );
-		// btnTwo.addActionListener( controller );
 		btnTwo.setBounds( 212, 146, 41, 23 );
 		frame.getContentPane().add( btnTwo );
 
 		btnThree = new JButton( "3" );
-		// btnThree.addActionListener( controller );
 		btnThree.setBounds( 258, 146, 41, 23 );
 		frame.getContentPane().add( btnThree );
 
 		btnFour = new JButton( "4" );
-		// btnFour.addActionListener( controller );
 		btnFour.setBounds( 166, 118, 41, 23 );
 		frame.getContentPane().add( btnFour );
 
 		btnFive = new JButton( "5" );
-		// btnFive.addActionListener( controller );
 		btnFive.setBounds( 212, 118, 41, 23 );
 		frame.getContentPane().add( btnFive );
 
 		btnSix = new JButton( "6" );
-		// btnSix.addActionListener( controller );
 		btnSix.setBounds( 258, 118, 41, 23 );
 		frame.getContentPane().add( btnSix );
 
 		btnSeven = new JButton( "7" );
-		// btnSeven.addActionListener( controller );
 		btnSeven.setBounds( 166, 90, 41, 23 );
 		frame.getContentPane().add( btnSeven );
 
 		btnEight = new JButton( "8" );
-		// btnEight.addActionListener( controller );
 		btnEight.setBounds( 212, 90, 41, 23 );
 		frame.getContentPane().add( btnEight );
 
 		btnNine = new JButton( "9" );
-		// btnNine.addActionListener( controller );
 		btnNine.setBounds( 258, 90, 41, 23 );
 		frame.getContentPane().add( btnNine );
 
 		btnDecimal = new JButton( "." );
-		// btnDecimal.addActionListener( controller );
 		btnDecimal.setBounds( 258, 174, 41, 23 );
 		frame.getContentPane().add( btnDecimal );
 
 		btnC = new JButton( "C" );
-		// btnC.addActionListener( controller );
 		btnC.setBounds( 166, 63, 41, 23 );
 		frame.getContentPane().add( btnC );
 
 		btnCe = new JButton( "CE" );
-		// btnCe.addActionListener( controller );
 		btnCe.setBounds( 113, 63, 48, 23 );
 		frame.getContentPane().add( btnCe );
 
