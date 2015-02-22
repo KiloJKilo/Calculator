@@ -77,7 +77,7 @@ public class View {
 		// ActionMap am = frame.getRootPane().getActionMap();
 
 		lblDisplay = new JLabel();
-		lblDisplay.setBounds( 115, 208, 232, 32 );
+		lblDisplay.setBounds( 115, 24, 232, 32 );
 		frame.getContentPane().add( lblDisplay );
 		lblDisplay.setBorder( BorderFactory.createLineBorder( Color.blue ) );
 
@@ -183,29 +183,38 @@ public class View {
 	}
 
 	// method used to update the display
-	public void updateDisplay( String entry ) {
-		// TODO: clean up changeover from text box to label
-		//TODO: Address weather this belongs in the view or the controller
+//	public void updateDisplay( String entry ) {
+//		// TODO: clean up changeover from text box to label
+//		//TODO: Address weather this belongs in the view or the controller
+//
+//		// Acquire the text that is currently shown in display
+//		// String currentText = txfDisplay.getText();
+//		String currentText = lblDisplay.getText();
+//
+//		if ( currentText == null ) {// if the display is empty, this is the first incoming entry
+//			// update the display to reflect the number
+//			// txfDisplay.setText( entry );
+//			lblDisplay.setText( entry );
+//
+//		} else if ( currentText != null ) {// the display was not null, so something is there. Add the incoming entry to the display, in addition to what was there
+//			String newText;
+//			newText = currentText + " " + entry;
+//			// txfDisplay.setText( newText );
+//			lblDisplay.setText( newText );
+//
+//		}
+//
+//	}
 
-		// Acquire the text that is currently shown in display
-		// String currentText = txfDisplay.getText();
-		String currentText = lblDisplay.getText();
-
-		if ( currentText == null ) {// if the display is empty, this is the first incoming entry
-			// update the display to reflect the number
-			// txfDisplay.setText( entry );
-			lblDisplay.setText( entry );
-
-		} else if ( currentText != null ) {// the display was not null, so something is there. Add the incoming entry to the display, in addition to what was there
-			String newText;
-			newText = currentText + " " + entry;
-			// txfDisplay.setText( newText );
-			lblDisplay.setText( newText );
-
-		}
-
+	public void update(String value) {
+//		if (digits < 0) {
+//			display.setText(value);
+//		} else {
+			String format = "%." + 2 + "f";
+			String text = String.format(format, Double.valueOf(value));
+			lblDisplay.setText(text);
+//		}
 	}
-
 
 	// method to toggle the outline border.
 	public void toggleBorder( char entry, boolean border ) {

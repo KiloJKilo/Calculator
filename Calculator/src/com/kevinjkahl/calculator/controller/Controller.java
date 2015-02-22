@@ -36,58 +36,83 @@ public class Controller extends KeyAdapter implements ActionListener {
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 		String cmd = e.getActionCommand();
-		view.updateDisplay( cmd );
-		switch ( cmd ) {
-		case "=":
-			System.out.println( "Equals" );
-			break;
-		case "+":
-			System.out.println( "Addition" );
-			break;
-		case "-":
-			System.out.println( "Subtraction" );
-			break;
-		case "/":
-			System.out.println( "Division" );
-			break;
-		case "*":
-			System.out.println( "Multiplication" );
-			break;
-		case "1":
-			System.out.println( "1" );
-			break;
-		case "2":
-			System.out.println( "2" );
-			break;
-		case "3":
-			System.out.println( "3" );
-			break;
-		case "4":
-			System.out.println( "4" );
-			break;
-		case "5":
-			System.out.println( "5" );
-			break;
-		case "6":
-			System.out.println( "6" );
-			break;
-		case "7":
-			System.out.println( "7" );
-			break;
-		case "8":
-			System.out.println( "8" );
-			break;
-		case "9":
-			System.out.println( "9" );
-			break;
-		case "c":
+//		switch ( cmd ) {
+//		case "=":
+//			System.out.println( "Equals" );
+//			model.update( cmd );
+//			view.update( model.getValue() );
+//			break;
+//		case "+":
+//			System.out.println( "Addition" );
+//			model.update( cmd );
+//			view.update( model.getValue() );
+//			break;
+//		case "-":
+//			System.out.println( "Subtraction" );
+//			model.update( cmd );
+//			view.update( model.getValue() );
+//			break;
+//		case "/":
+//			System.out.println( "Division" );
+//			model.update( cmd );
+//			view.update( model.getValue() );
+//			break;
+//		case "*":
+//			System.out.println( "Multiplication" );
+//			model.update( cmd );
+//			view.update( model.getValue() );
+//			break;
+//		case "1":
+//			System.out.println( "1" );
+//			model.update( cmd );
+//			view.update( model.getValue() );
+//			break;
+//		case "2":
+//			System.out.println( "2" );
+//			model.update( cmd );
+//			view.update( model.getValue() );
+//			break;
+//		case "3":
+//			System.out.println( "3" );
+//			model.update( cmd );
+//			view.update( model.getValue() );
+//			break;
+//		case "4":
+//			System.out.println( "4" );
+//			break;
+//		case "5":
+//			System.out.println( "5" );
+//			break;
+//		case "6":
+//			System.out.println( "6" );
+//			break;
+//		case "7":
+//			System.out.println( "7" );
+//			break;
+//		case "8":
+//			System.out.println( "8" );
+//			break;
+//		case "9":
+//			System.out.println( "9" );
+//			break;
+//		case "c":
+//			System.out.println( "Clear" );
+//			break;
+//		case "Ce":
+//			System.out.println( "Clear Everything" );
+//			break;
+//		default:
+//			break;
+//		}
+//
+		
+		if ( cmd == "Clear" ) {
 			System.out.println( "Clear" );
-			break;
-		case "Ce":
-			System.out.println( "Clear Everything" );
-			break;
-		default:
-			break;
+		} else if ( cmd == "Clear Everything" ) {
+				System.out.println( "Clear Everyhing" );
+		} else {
+			model.update( cmd );
+			view.update( model.getValue() );
 		}
 
 	}
@@ -153,8 +178,8 @@ public class Controller extends KeyAdapter implements ActionListener {
 		}
 
 	}
-	
-	public Action test(String key) {
+
+	public Action test( String key ) {
 		// TODO Auto-generated method stub
 		return null;
 	}
