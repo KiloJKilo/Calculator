@@ -153,5 +153,9 @@ public class Controller extends KeyAdapter implements ActionListener {
 		}
 
 	}
+	
+	public void controllerVisibilityTest(){
+		System.out.println( "Test" );
+	}
 
 }
