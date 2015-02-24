@@ -36,152 +36,60 @@ public class Controller extends KeyAdapter implements ActionListener {
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 		String cmd = e.getActionCommand();
-//		switch ( cmd ) {
-//		case "=":
-//			System.out.println( "Equals" );
-//			model.update( cmd );
-//			view.update( model.getValue() );
-//			break;
-//		case "+":
-//			System.out.println( "Addition" );
-//			model.update( cmd );
-//			view.update( model.getValue() );
-//			break;
-//		case "-":
-//			System.out.println( "Subtraction" );
-//			model.update( cmd );
-//			view.update( model.getValue() );
-//			break;
-//		case "/":
-//			System.out.println( "Division" );
-//			model.update( cmd );
-//			view.update( model.getValue() );
-//			break;
-//		case "*":
-//			System.out.println( "Multiplication" );
-//			model.update( cmd );
-//			view.update( model.getValue() );
-//			break;
-//		case "1":
-//			System.out.println( "1" );
-//			model.update( cmd );
-//			view.update( model.getValue() );
-//			break;
-//		case "2":
-//			System.out.println( "2" );
-//			model.update( cmd );
-//			view.update( model.getValue() );
-//			break;
-//		case "3":
-//			System.out.println( "3" );
-//			model.update( cmd );
-//			view.update( model.getValue() );
-//			break;
-//		case "4":
-//			System.out.println( "4" );
-//			break;
-//		case "5":
-//			System.out.println( "5" );
-//			break;
-//		case "6":
-//			System.out.println( "6" );
-//			break;
-//		case "7":
-//			System.out.println( "7" );
-//			break;
-//		case "8":
-//			System.out.println( "8" );
-//			break;
-//		case "9":
-//			System.out.println( "9" );
-//			break;
-//		case "c":
-//			System.out.println( "Clear" );
-//			break;
-//		case "Ce":
-//			System.out.println( "Clear Everything" );
-//			break;
-//		default:
-//			break;
-//		}
-//
-		
-		if ( cmd == "Clear" ) {
-			System.out.println( "Clear" );
-		} else if ( cmd == "Clear Everything" ) {
-				System.out.println( "Clear Everyhing" );
+
+		// TODO: create a method to have a numerical representation so that the prog can check if not a number
+		// TODO Could create an all inclusive method of clearing that takes a c or ce paramater
+
+		// new method to handle button actions
+		if ( cmd == "C" ) {// if user presses clear
+			if ( model.getLastInput() == "Operator" ) {// if this is an operator
+				System.out.println( "Clear operator" );
+				model.setOperation( "" );
+			} else {// it is a number - clear the last number
+				System.out.println( "Clear number" );
+				model.clearDisplay();
+				view.update( "0" );
+
+			}
+
+		} else if ( cmd == "CE" ) {
+			System.out.println( "Clear Everyhing" );
+			model.setOperation( "" );
+			model.clearDisplay();
+			model.setStart( true );
+			view.update( "0" );
+			model.update( "0" );
+
 		} else {
-			model.update( cmd );
-			view.update( model.getValue() );
+			// handle a non number being the first button pressed
+			// TODO: Does this belong in the model?
+			if ( model.isStart() ) { // if this is the start of a new operation
+				if ( isOperator( cmd ) ) { // and one of these keys were entered
+					// is there a display value? if so, continue the math with that number
+					if ( model.getValue() != null || model.getValue() != "" ) {
+						model.setStart( false );// reset the model so we are still 'in an operation'
+						model.update( cmd );
+						view.update( model.getValue() );
+					} else {// if there was nothing there, do nothing
+						System.out.println( "Non Number to start" );
+					}
+
+				} else {
+					model.update( cmd );
+					view.update( model.getValue() );
+				}
+			} else {
+				model.update( cmd );
+				view.update( model.getValue() );
+			}
 		}
-
 	}
 
-	// method to handle key events
-	public void keyPressed( KeyEvent e ) {
-		// TODO: send each key event to the action listener or the respective method for the key/number
-		char key = e.getKeyChar();
-
-		switch ( key ) {
-		case '\n':
-			System.out.println( "Equals" );
-			break;
-		case '+':
-			System.out.println( "Addition" );
-			break;
-		case '-':
-			System.out.println( "Subtraction" );
-			break;
-		case '/':
-			System.out.println( "Division" );
-			break;
-		case '*':
-			System.out.println( "Multiplication" );
-			break;
-		case '1':
-			System.out.println( "1" );
-			// view.btnOne.setBorder(BorderFactory.createLineBorder(Color.blue));
-			view.toggleBorder( '1', true );
-			break;
-		case '2':
-			System.out.println( "2" );
-			break;
-		case '3':
-			System.out.println( "3" );
-			break;
-		case '4':
-			System.out.println( "4" );
-			break;
-		case '5':
-			System.out.println( "5" );
-			break;
-		case '6':
-			System.out.println( "6" );
-			break;
-		case '7':
-			System.out.println( "7" );
-			break;
-		case '8':
-			System.out.println( "8" );
-			break;
-		case '9':
-			System.out.println( "9" );
-			break;
-		case 'c':
-			System.out.println( "Clear" );
-			break;
-		case '':
-			System.out.println( "Clear Everything" );
-			break;
-		default:
-			break;
+	private boolean isOperator( String command ) {
+		if ( command == "*" || command == "+" || command == "-" || command == "/" || command == "=" ) {
+			return true;
+		} else {
+			return false;
 		}
-
 	}
-
-	public Action test( String key ) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

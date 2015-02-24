@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.kevinjkahl.calculator.controller.Controller;
 
@@ -76,10 +77,11 @@ public class View {
 		// InputMap im = frame.getRootPane().getInputMap(JComponent.WHEN_FOCUSED);
 		// ActionMap am = frame.getRootPane().getActionMap();
 
-		lblDisplay = new JLabel();
+		lblDisplay = new JLabel("", SwingConstants.RIGHT);
 		lblDisplay.setBounds( 115, 24, 232, 32 );
-		frame.getContentPane().add( lblDisplay );
 		lblDisplay.setBorder( BorderFactory.createLineBorder( Color.blue ) );
+		frame.getContentPane().add( lblDisplay );
+		
 
 		btnMultiplication = new JButton( "*" );
 		btnMultiplication.setBounds( 258, 63, 41, 23 );
@@ -102,7 +104,6 @@ public class View {
 		frame.getContentPane().add( btnEquals );
 
 		btnZero = new JButton( "0" );
-		// btnZero.addActionListener( controller );
 		btnZero.setBounds( 167, 174, 86, 23 );
 		frame.getContentPane().add( btnZero );
 
@@ -147,16 +148,16 @@ public class View {
 		frame.getContentPane().add( btnDecimal );
 
 		btnC = new JButton( "C" );
-		btnC.setBounds( 166, 63, 41, 23 );
+		btnC.setBounds( 100, 63, 61, 23 );
 		frame.getContentPane().add( btnC );
 
 		btnCe = new JButton( "CE" );
-		btnCe.setBounds( 113, 63, 48, 23 );
+		btnCe.setBounds( 100, 90, 61, 23 );
 		frame.getContentPane().add( btnCe );
 
 		btnVoidA = new JButton( "" );
 		btnVoidA.setEnabled( false );
-		btnVoidA.setBounds( 113, 90, 48, 23 );
+		btnVoidA.setBounds( 166, 63, 41, 23 );
 		frame.getContentPane().add( btnVoidA );
 
 		btnVoidB = new JButton( "" );

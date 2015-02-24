@@ -20,6 +20,9 @@ public class Model {
 	// This is true if a decimal dot has been entered for the current value.
 	private boolean dot;
 
+	// this holds if the last input was a number or a operator
+	private String lastInput;
+
 	public Model() {
 		displayValue = 0.0;
 		displayString = "" + displayValue;
@@ -47,15 +50,19 @@ public class Model {
 		if ( text.length() == 1 && "0123456789".indexOf( text ) >= 0 ) {
 			displayString += text;
 			displayValue = Double.valueOf( displayString );
+			lastInput = "Number";
 		} else if ( text.equals( "." ) ) {
 			if ( !dot ) {
 				dot = true;
 				if ( displayString.equals( "" ) ) {
 					displayString = "0";
+
 				}
 				displayString += ".";
 			}
+			lastInput = "Number";
 		} else {
+			lastInput = "Operator";
 			if ( operation.equals( "+" ) ) {
 				displayValue = internalValue + displayValue;
 			} else if ( operation.equals( "-" ) ) {
@@ -72,13 +79,26 @@ public class Model {
 		}
 	}
 
-	public double addition( double first, double second ) {
+	
+	public void clearDisplay() {
+		displayString = "";
+	}
 
-		double sum = 0;
+	public boolean isStart() {
+		return start;
+	}
 
-		sum = first + second;
+	public void setStart( boolean start ) {
+		this.start = start;
+	}
 
-		return sum;
+	public String getLastInput() {
+		return lastInput;
+	}
+
+	
+	public void setOperation( String operation ) {
+		this.operation = operation;
 	}
 
 }
