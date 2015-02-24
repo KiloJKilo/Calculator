@@ -38,21 +38,20 @@ public class Controller extends KeyAdapter implements ActionListener {
 		String cmd = e.getActionCommand();
 
 		// TODO: create a method to have a numerical representation so that the prog can check if not a number
-		// TODO Could create an all inclusive method of clearing that takes a c or ce paramater
+		// TODO Could create an all inclusive method of clearing that takes a c or ce parameter
+		// TODO: Consolidate the operations and possibly place into select
 
-		// new method to handle button actions
 		if ( cmd == "C" ) {// if user presses clear
-			if ( model.getLastInput() == "Operator" ) {// if this is an operator
+			if ( model.getLastInput() == "Operator" ) {// if the last thing entered was an operator, clear that
 				System.out.println( "Clear operator" );
 				model.setOperation( "" );
-			} else {// it is a number - clear the last number
+			} else {// other wise it was a number, clear that.
 				System.out.println( "Clear number" );
 				model.clearDisplay();
 				view.update( "0" );
+			}// end C
 
-			}
-
-		} else if ( cmd == "CE" ) {
+		} else if ( cmd == "CE" ) {// if the user presses clear all
 			System.out.println( "Clear Everyhing" );
 			model.setOperation( "" );
 			model.clearDisplay();
@@ -60,29 +59,33 @@ public class Controller extends KeyAdapter implements ActionListener {
 			view.update( "0" );
 			model.update( "0" );
 
-		} else {
+		} else {// c or ce was not pressed, it's going to be a number or operator
+
 			// handle a non number being the first button pressed
 			// TODO: Does this belong in the model?
 			if ( model.isStart() ) { // if this is the start of a new operation
-				if ( isOperator( cmd ) ) { // and one of these keys were entered
-					// is there a display value? if so, continue the math with that number
-					if ( model.getValue() != null || model.getValue() != "" ) {
-						model.setStart( false );// reset the model so we are still 'in an operation'
-						model.update( cmd );
-						view.update( model.getValue() );
-					} else {// if there was nothing there, do nothing
-						System.out.println( "Non Number to start" );
-					}
+				if ( isOperator( cmd ) ) { // and an operator was entered
+					if ( model.getOperation() != null || model.getOperation() != "" ) {// there is an operator already, change it
+						model.setOperation( cmd );
+					} else {// they are not trying to change the operator
+						if ( model.getValue() != null || model.getValue() != "" ) {// is there a display value? if so, continue the math with that number
+							model.setStart( false );// reset the model so we are still 'in an operation'
+							model.update( cmd );
+							view.update( model.getValue() );
+						} else {// if there was nothing there, do nothing
+							System.out.println( "Non Number to start" );
+						}
+					}// end start of new operation
 
-				} else {
+				} else {// they did not enter an operator
 					model.update( cmd );
 					view.update( model.getValue() );
 				}
-			} else {
+			} else {// not the start of a new operation
 				model.update( cmd );
 				view.update( model.getValue() );
 			}
-		}
+		}// end handling a non number
 	}
 
 	private boolean isOperator( String command ) {

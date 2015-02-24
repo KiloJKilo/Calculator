@@ -70,7 +70,12 @@ public class Model {
 			} else if ( operation.equals( "*" ) ) {
 				displayValue = internalValue * displayValue;
 			} else if ( operation.equals( "/" ) ) {
-				displayValue = internalValue / displayValue;
+				if ( displayValue == 0 || displayValue == 0.00 ) {
+
+				} else {
+					displayValue = internalValue / displayValue;
+				}
+
 			}
 			displayString = "" + displayValue;
 			internalValue = displayValue;
@@ -79,7 +84,6 @@ public class Model {
 		}
 	}
 
-	
 	public void clearDisplay() {
 		displayString = "";
 	}
@@ -96,9 +100,12 @@ public class Model {
 		return lastInput;
 	}
 
-	
 	public void setOperation( String operation ) {
 		this.operation = operation;
+	}
+
+	public String getOperation() {
+		return operation;
 	}
 
 }
