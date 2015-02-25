@@ -7,13 +7,20 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ActionMap;
 import javax.swing.BorderFactory;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
-import com.kevinjkahl.calculator.controller.Controller;
+import com.kevinjkahl.calculator.controller.Controller.ClearAction;
+import com.kevinjkahl.calculator.controller.Controller.ClearEverythingAction;
+import com.kevinjkahl.calculator.controller.Controller.NumberAction;
+import com.kevinjkahl.calculator.controller.Controller.OperatorAction;
 
 public class View {
 
@@ -44,6 +51,13 @@ public class View {
 	private JButton btnVoidB;
 	private JButton btnVoidC;
 	private JButton btnVoidD;
+	private ClearEverythingAction clearEverythingAction;
+	private InputMap im;
+	private ActionMap am;
+	private ClearAction clearAction;
+	private NumberAction numberAction;
+	private OperatorAction operatorAction;
+	
 
 	public void CalcView() {
 		EventQueue.invokeLater( new Runnable() {
@@ -68,225 +82,195 @@ public class View {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setFont( new Font( "Tahoma", Font.PLAIN, 10 ) );
-		frame.setBounds( 100, 100, 450, 300 );
+		frame.setBounds( 100, 100, 316, 300 );
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		frame.getContentPane().setLayout( null );
 		// frame.addKeyListener( controller );
 		frame.setFocusable( true );
 
-		// InputMap im = frame.getRootPane().getInputMap(JComponent.WHEN_FOCUSED);
-		// ActionMap am = frame.getRootPane().getActionMap();
+		im = frame.getRootPane().getInputMap( JComponent.WHEN_IN_FOCUSED_WINDOW );
+		am = frame.getRootPane().getActionMap();
 
-		lblDisplay = new JLabel("", SwingConstants.RIGHT);
-		lblDisplay.setBounds( 115, 24, 232, 32 );
+		// frame.getRootPane().getInputMap().put( KeyStroke.getKeyStroke( "ESCAPE" ), escAction );
+		// frame.getRootPane().getActionMap().put("doSomething", escAction);
+
+		lblDisplay = new JLabel( "", SwingConstants.RIGHT );
+		lblDisplay.setBounds( 29, 11, 247, 32 );
 		lblDisplay.setBorder( BorderFactory.createLineBorder( Color.blue ) );
 		frame.getContentPane().add( lblDisplay );
-		
 
 		btnMultiplication = new JButton( "*" );
-		btnMultiplication.setBounds( 258, 63, 41, 23 );
+		btnMultiplication.setBounds( 187, 50, 41, 23 );
 		frame.getContentPane().add( btnMultiplication );
 
 		btnDivision = new JButton( "/" );
-		btnDivision.setBounds( 212, 63, 41, 23 );
+		btnDivision.setBounds( 141, 50, 41, 23 );
 		frame.getContentPane().add( btnDivision );
 
 		btnAddition = new JButton( "+" );
-		btnAddition.setBounds( 304, 90, 43, 51 );
+		btnAddition.setBounds( 233, 77, 43, 51 );
 		frame.getContentPane().add( btnAddition );
 
 		btnSubtraction = new JButton( "-" );
-		btnSubtraction.setBounds( 304, 63, 43, 23 );
+		btnSubtraction.setBounds( 233, 50, 43, 23 );
 		frame.getContentPane().add( btnSubtraction );
 
 		btnEquals = new JButton( "=" );
-		btnEquals.setBounds( 304, 146, 43, 51 );
+		btnEquals.setBounds( 233, 133, 43, 51 );
 		frame.getContentPane().add( btnEquals );
 
 		btnZero = new JButton( "0" );
-		btnZero.setBounds( 167, 174, 86, 23 );
+		btnZero.setBounds( 96, 161, 86, 23 );
 		frame.getContentPane().add( btnZero );
 
 		btnOne = new JButton( "1" );
-		btnOne.setBounds( 166, 146, 41, 23 );
+		btnOne.setBounds( 95, 133, 41, 23 );
 		frame.getContentPane().add( btnOne );
 
 		btnTwo = new JButton( "2" );
-		btnTwo.setBounds( 212, 146, 41, 23 );
+		btnTwo.setBounds( 141, 133, 41, 23 );
 		frame.getContentPane().add( btnTwo );
 
 		btnThree = new JButton( "3" );
-		btnThree.setBounds( 258, 146, 41, 23 );
+		btnThree.setBounds( 187, 133, 41, 23 );
 		frame.getContentPane().add( btnThree );
 
 		btnFour = new JButton( "4" );
-		btnFour.setBounds( 166, 118, 41, 23 );
+		btnFour.setBounds( 95, 105, 41, 23 );
 		frame.getContentPane().add( btnFour );
 
 		btnFive = new JButton( "5" );
-		btnFive.setBounds( 212, 118, 41, 23 );
+		btnFive.setBounds( 141, 105, 41, 23 );
 		frame.getContentPane().add( btnFive );
 
 		btnSix = new JButton( "6" );
-		btnSix.setBounds( 258, 118, 41, 23 );
+		btnSix.setBounds( 187, 105, 41, 23 );
 		frame.getContentPane().add( btnSix );
 
 		btnSeven = new JButton( "7" );
-		btnSeven.setBounds( 166, 90, 41, 23 );
+		btnSeven.setBounds( 95, 77, 41, 23 );
 		frame.getContentPane().add( btnSeven );
 
 		btnEight = new JButton( "8" );
-		btnEight.setBounds( 212, 90, 41, 23 );
+		btnEight.setBounds( 141, 77, 41, 23 );
 		frame.getContentPane().add( btnEight );
 
 		btnNine = new JButton( "9" );
-		btnNine.setBounds( 258, 90, 41, 23 );
+		btnNine.setBounds( 187, 77, 41, 23 );
 		frame.getContentPane().add( btnNine );
 
 		btnDecimal = new JButton( "." );
-		btnDecimal.setBounds( 258, 174, 41, 23 );
+		btnDecimal.setBounds( 187, 161, 41, 23 );
 		frame.getContentPane().add( btnDecimal );
 
 		btnC = new JButton( "C" );
-		btnC.setBounds( 100, 63, 61, 23 );
+		// btnC.setAction( escAction );
+		btnC.setBounds( 29, 50, 61, 23 );
 		frame.getContentPane().add( btnC );
 
 		btnCe = new JButton( "CE" );
-		btnCe.setBounds( 100, 90, 61, 23 );
+		btnCe.setBounds( 29, 77, 61, 23 );
 		frame.getContentPane().add( btnCe );
 
 		btnVoidA = new JButton( "" );
 		btnVoidA.setEnabled( false );
-		btnVoidA.setBounds( 166, 63, 41, 23 );
+		btnVoidA.setBounds( 95, 50, 41, 23 );
 		frame.getContentPane().add( btnVoidA );
 
 		btnVoidB = new JButton( "" );
 		btnVoidB.setEnabled( false );
-		btnVoidB.setBounds( 113, 118, 48, 23 );
+		btnVoidB.setBounds( 29, 105, 61, 23 );
 		frame.getContentPane().add( btnVoidB );
 
 		btnVoidC = new JButton( "" );
 		btnVoidC.setEnabled( false );
-		btnVoidC.setBounds( 113, 146, 48, 23 );
+		btnVoidC.setBounds( 29, 133, 61, 23 );
 		frame.getContentPane().add( btnVoidC );
 
 		btnVoidD = new JButton( "" );
 		btnVoidD.setEnabled( false );
-		btnVoidD.setBounds( 113, 174, 48, 23 );
+		btnVoidD.setBounds( 29, 161, 61, 23 );
 		frame.getContentPane().add( btnVoidD );
 
-		// txfDisplay = new JTextField( null );
-		// txfDisplay.setHorizontalAlignment( SwingConstants.RIGHT );
-		// txfDisplay.setBounds( 113, 25, 234, 32 );
-		// frame.getContentPane().add( txfDisplay );
-		// txfDisplay.setColumns( 10 );
-
 	}
 
-	// method used to update the display
-//	public void updateDisplay( String entry ) {
-//		// TODO: clean up changeover from text box to label
-//		//TODO: Address weather this belongs in the view or the controller
-//
-//		// Acquire the text that is currently shown in display
-//		// String currentText = txfDisplay.getText();
-//		String currentText = lblDisplay.getText();
-//
-//		if ( currentText == null ) {// if the display is empty, this is the first incoming entry
-//			// update the display to reflect the number
-//			// txfDisplay.setText( entry );
-//			lblDisplay.setText( entry );
-//
-//		} else if ( currentText != null ) {// the display was not null, so something is there. Add the incoming entry to the display, in addition to what was there
-//			String newText;
-//			newText = currentText + " " + entry;
-//			// txfDisplay.setText( newText );
-//			lblDisplay.setText( newText );
-//
-//		}
-//
-//	}
-
-	public void update(String value) {
-//		if (digits < 0) {
-//			display.setText(value);
-//		} else {
-			String format = "%." + 2 + "f";
-			String text = String.format(format, Double.valueOf(value));
-			lblDisplay.setText(text);
-//		}
-	}
-
-	// method to toggle the outline border.
-	public void toggleBorder( char entry, boolean border ) {
-
-		switch ( entry ) {
-		case '\n':
-			System.out.println( "Equals" );
-			break;
-		case '+':
-			System.out.println( "Addition" );
-			break;
-		case '-':
-			System.out.println( "Subtraction" );
-			break;
-		case '/':
-			System.out.println( "Division" );
-			break;
-		case '*':
-			System.out.println( "Multiplication" );
-			break;
-		case '1':
-			if ( border = true ) {
-				btnOne.setBorder( BorderFactory.createLineBorder( Color.blue ) );
-			} else {
-				btnOne.setBorder( BorderFactory.createLineBorder( Color.blue ) );
-			}
-
-			break;
-		case '2':
-			System.out.println( "2" );
-			break;
-		case '3':
-			System.out.println( "3" );
-			break;
-		case '4':
-			System.out.println( "4" );
-			break;
-		case '5':
-			System.out.println( "5" );
-			break;
-		case '6':
-			System.out.println( "6" );
-			break;
-		case '7':
-			System.out.println( "7" );
-			break;
-		case '8':
-			System.out.println( "8" );
-			break;
-		case '9':
-			System.out.println( "9" );
-			break;
-		case 'c':
-			System.out.println( "Clear" );
-			break;
-		case '':
-			System.out.println( "Clear Everything" );
-			break;
-		default:
-			break;
-		}
-
+	public void update( String value ) {
+		// if (digits < 0) {
+		// display.setText(value);
+		// } else {
+		String format = "%." + 2 + "f";
+		String text = String.format( format, Double.valueOf( value ) );
+		lblDisplay.setText( text );
+		// }
 	}
 
 	public void setController( ActionListener theController ) {
 		Component[] components = frame.getContentPane().getComponents();
+		//escAction = EscAction.EscActionFactory();
 		for ( Component component : components ) {
 			if ( component instanceof JButton ) {
 				JButton button = ( JButton ) component;
 				button.addActionListener( theController );
+				// escAction = new Controller.EscAction( "escape", new Integer( KeyEvent.VK_ESCAPE ) );
+				// button.setAction( escAction );
 			}
 		}
+	}
+
+	public void createActions() {
+		// create our actions
+		clearEverythingAction = ClearEverythingAction.ClearEverythingActionFactory();
+		clearAction = ClearAction.ClearActionFactory();
+		numberAction = NumberAction.NumberActionFactory();
+		operatorAction = OperatorAction.OperatorActionFactory();
+		
+		//register buttons
+		btnC.addActionListener( clearAction );
+		btnCe.addActionListener( clearEverythingAction );
+		btnZero.addActionListener( numberAction );
+		btnOne.addActionListener( numberAction );
+		btnTwo.addActionListener( numberAction );
+		btnThree.addActionListener( numberAction );
+		btnFour.addActionListener( numberAction );
+		btnFive.addActionListener( numberAction );
+		btnSix.addActionListener( numberAction );
+		btnSeven.addActionListener( numberAction );
+		btnEight.addActionListener( numberAction );
+		btnNine.addActionListener( numberAction );
+		btnDecimal.addActionListener( numberAction );
+		btnMultiplication.addActionListener( operatorAction );
+		btnDivision.addActionListener( operatorAction );
+		btnAddition.addActionListener( operatorAction );
+		btnSubtraction.addActionListener( operatorAction );
+		btnEquals.addActionListener( operatorAction );
+		
+		//map keys
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_ESCAPE, 0 ), "Escape" );//escape goes to clear everything action
+		
+		//number keys go to number action
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD0, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD1, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD2, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD3, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD4, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD5, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD6, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD7, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD8, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD9, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_DECIMAL, 0 ), "Number" );
+		
+		//operators go to operator action
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_MULTIPLY, 0 ), "Operator" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_DIVIDE, 0 ), "Operator" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_ADD, 0 ), "Operator" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_SUBTRACT, 0 ), "Operator" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_EQUALS, 0 ), "Operator" );
+		
+		//map actions
+		am.put( "Escape", clearEverythingAction );
+		am.put( "Number", numberAction );
+		am.put( "Operator", operatorAction );
+		
 	}
 }

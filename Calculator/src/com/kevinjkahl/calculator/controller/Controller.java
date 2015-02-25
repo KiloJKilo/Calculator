@@ -5,8 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.Action;
+import javax.swing.AbstractAction;
 
+import com.kevinjkahl.calculator.controller.Controller.EscAction;
 import com.kevinjkahl.calculator.model.Model;
 import com.kevinjkahl.calculator.view.View;
 
@@ -57,7 +58,7 @@ public class Controller extends KeyAdapter implements ActionListener {
 			model.clearDisplay();
 			model.setStart( true );
 			view.update( "0" );
-			model.update( "0" );
+			model.HandleNumber( "0" );
 
 		} else {// c or ce was not pressed, it's going to be a number or operator
 
@@ -70,7 +71,7 @@ public class Controller extends KeyAdapter implements ActionListener {
 					} else {// they are not trying to change the operator
 						if ( model.getValue() != null || model.getValue() != "" ) {// is there a display value? if so, continue the math with that number
 							model.setStart( false );// reset the model so we are still 'in an operation'
-							model.update( cmd );
+							// model.update( cmd );
 							view.update( model.getValue() );
 						} else {// if there was nothing there, do nothing
 							System.out.println( "Non Number to start" );
@@ -78,16 +79,22 @@ public class Controller extends KeyAdapter implements ActionListener {
 					}// end start of new operation
 
 				} else {// they did not enter an operator
-					model.update( cmd );
+					// model.update( cmd );
 					view.update( model.getValue() );
 				}
 			} else {// not the start of a new operation
-				model.update( cmd );
+				// model.update( cmd );
 				view.update( model.getValue() );
 			}
 		}// end handling a non number
 	}
 
+	// method to determine if the current command is a operator
+
+	/**
+	 * @param the
+	 *            current input. a number, c, ce, or an operator
+	 */
 	private boolean isOperator( String command ) {
 		if ( command == "*" || command == "+" || command == "-" || command == "/" || command == "=" ) {
 			return true;
@@ -95,4 +102,102 @@ public class Controller extends KeyAdapter implements ActionListener {
 			return false;
 		}
 	}
+
+	public static class EscAction extends AbstractAction {
+
+		public EscAction( String name, Integer mnemonic ) {
+			// constructor
+		}
+
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			// TODO Auto-generated method stub
+			System.out.println( "Move this to Escape " );
+		}
+
+		public static EscAction EscActionFactory() {
+			// TODO Auto-generated method stub
+			return new EscAction( "Escape", new Integer( KeyEvent.VK_ESCAPE ) );
+		}
+
+	}
+
+	public static class ClearEverythingAction extends AbstractAction {
+
+		public ClearEverythingAction( ) {
+			// constructor
+		}
+
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			// TODO Auto-generated method stub
+			System.out.println( "Clear Everything Action" );
+		}
+
+		public static ClearEverythingAction ClearEverythingActionFactory() {
+			// TODO Auto-generated method stub
+			//return new ClearEverythingAction( "Clear Everything", new Integer( KeyEvent.VK_ESCAPE ) );
+			return new ClearEverythingAction(  );
+		}
+
+	}
+	@SuppressWarnings ( "serial" )
+	public static class ClearAction extends AbstractAction {
+
+		public ClearAction( ) {
+			// constructor
+		}
+
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			// TODO Auto-generated method stub
+			System.out.println( "Clear Action" );
+		}
+
+		public static ClearAction ClearActionFactory() {
+			// TODO Auto-generated method stub
+			return new ClearAction( );
+		}
+	}
+	
+	@SuppressWarnings ( "serial" )
+	public static class NumberAction extends AbstractAction {
+
+		public NumberAction( ) {
+			// constructor
+		}
+
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			// TODO Auto-generated method stub
+			System.out.println( e.getActionCommand() );
+			//System.out.println( "Number Action" );
+		}
+
+		public static NumberAction NumberActionFactory() {
+			// TODO Auto-generated method stub
+			return new NumberAction( );
+		}
+	}
+
+	@SuppressWarnings ( "serial" )
+	public static class OperatorAction extends AbstractAction {
+
+		public OperatorAction( ) {
+			// constructor
+		}
+
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			// TODO Auto-generated method stub
+			System.out.println( e.getActionCommand() );
+		}
+
+		public static OperatorAction OperatorActionFactory() {
+			// TODO Auto-generated method stub
+			return new OperatorAction( );
+		}
+
+	}
+	
 }
