@@ -39,16 +39,16 @@ public class Model {
 	 **/
 	public void clear( String clear ) {
 		if ( clear == "CE" ) {
-
 			// clear everything
 			defaultState();
-
+			System.out.println( "Everything Was Cleared" );
 		} else if ( clear == "C" ) {
-
 			// clear last - of operator, clear the operator, if not operator, clear display and set to zero
 			if ( this.getLastInput() == "Operator" ) {
+				System.out.println( "Last Operator Cleared" );
 				this.setOperation( "" );
 			} else {
+				System.out.println( "Last Number Cleared" );
 				this.clearDisplay();
 				this.HandleNumber( "0" );
 			}// end if operator or number
@@ -57,12 +57,18 @@ public class Model {
 	}// end if CE or C
 
 	public void HandleNumber( String number ) {
+		if ( start ) {
+			defaultState();
+		}
 		lastInput = "Number";
 		displayString += number;
 		displayValue = Double.valueOf( displayString );
 	}
 
 	public void HandleDot() {
+		if ( start ) {
+			defaultState();
+		}
 		lastInput = "Number";
 		if ( !dot ) {
 			dot = true;
@@ -73,31 +79,29 @@ public class Model {
 			displayString += ".";
 		}
 		lastInput = "Number";
-
 	}
 
 	public void HandleOperator( String operator ) {
+
+		if ( start ) {
+			defaultState();
+		}
 		lastInput = "Operator";
-		if ( operation.equals( "+" ) ) {
+		if ( operator.equals( "+" ) ) {
 			displayValue = internalValue + displayValue;
-		} else if ( operation.equals( "-" ) ) {
+		} else if ( operator.equals( "-" ) ) {
 			displayValue = internalValue - displayValue;
-		} else if ( operation.equals( "*" ) ) {
+		} else if ( operator.equals( "*" ) ) {
 			displayValue = internalValue * displayValue;
-		} else if ( operation.equals( "/" ) ) {
-			// if they are trying to divide by zero, just let it pass by
+		} else if ( operator.equals( "/" ) ) {
 			if ( displayValue == 0 || displayValue == 0.00 ) {
 
 			} else {
 				displayValue = internalValue / displayValue;
 			}
 
-		} else if ( operation.equals( "=" ) ) {
-			displayString = "" + displayValue;
-			internalValue = displayValue;
-			operation = operator;
-			//start = true;
-		}// end operator assignment
+		}
+updateValues( operator );
 	}
 
 	/**
@@ -108,12 +112,20 @@ public class Model {
 	 */
 	private void defaultState() {
 		displayValue = 0.0;
-		displayString = "" + displayValue;
+		displayString = "0";
 		internalValue = 0;
 		dot = false;
 		start = true;
 		operation = "";
 
+	}
+	
+	private void updateValues(String operator ){
+		displayString = "" + displayValue;
+		internalValue = displayValue;
+		operation = operator;
+		start = true;
+		
 	}
 
 	public void clearDisplay() {

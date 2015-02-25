@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 
 import com.kevinjkahl.calculator.controller.Controller.ClearAction;
 import com.kevinjkahl.calculator.controller.Controller.ClearEverythingAction;
+import com.kevinjkahl.calculator.controller.Controller.DotAction;
 import com.kevinjkahl.calculator.controller.Controller.NumberAction;
 import com.kevinjkahl.calculator.controller.Controller.OperatorAction;
 
@@ -57,6 +58,7 @@ public class View {
 	private ClearAction clearAction;
 	private NumberAction numberAction;
 	private OperatorAction operatorAction;
+	private DotAction dotAction;
 	
 
 	public void CalcView() {
@@ -223,6 +225,7 @@ public class View {
 		clearAction = ClearAction.ClearActionFactory();
 		numberAction = NumberAction.NumberActionFactory();
 		operatorAction = OperatorAction.OperatorActionFactory();
+		dotAction = DotAction.DotActionFactory();
 		
 		//register buttons
 		btnC.addActionListener( clearAction );
@@ -237,7 +240,7 @@ public class View {
 		btnSeven.addActionListener( numberAction );
 		btnEight.addActionListener( numberAction );
 		btnNine.addActionListener( numberAction );
-		btnDecimal.addActionListener( numberAction );
+		btnDecimal.addActionListener( dotAction );
 		btnMultiplication.addActionListener( operatorAction );
 		btnDivision.addActionListener( operatorAction );
 		btnAddition.addActionListener( operatorAction );
@@ -258,19 +261,20 @@ public class View {
 		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD7, 0 ), "Number" );
 		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD8, 0 ), "Number" );
 		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_NUMPAD9, 0 ), "Number" );
-		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_DECIMAL, 0 ), "Number" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_DECIMAL, 0 ), "Dot" );
 		
 		//operators go to operator action
 		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_MULTIPLY, 0 ), "Operator" );
 		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_DIVIDE, 0 ), "Operator" );
 		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_ADD, 0 ), "Operator" );
 		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_SUBTRACT, 0 ), "Operator" );
-		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_EQUALS, 0 ), "Operator" );
+		im.put( KeyStroke.getKeyStroke( KeyEvent.VK_EQUALS, 0 ), "Dot" );
 		
 		//map actions
 		am.put( "Escape", clearEverythingAction );
 		am.put( "Number", numberAction );
 		am.put( "Operator", operatorAction );
+		am.put( "Dot", dotAction );
 		
 	}
 }

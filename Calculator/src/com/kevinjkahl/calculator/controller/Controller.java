@@ -3,20 +3,18 @@ package com.kevinjkahl.calculator.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 
-import com.kevinjkahl.calculator.controller.Controller.EscAction;
 import com.kevinjkahl.calculator.model.Model;
 import com.kevinjkahl.calculator.view.View;
 
 public class Controller extends KeyAdapter implements ActionListener {
 
 	// The model of this MVC implementation of a calculator.
-	private Model model;
+	private static Model model;
 	// The view of this MVC implementation of a calculator.
-	private View view;
+	private static View view;
 
 	/**
 	 * This saves the model and and view.
@@ -103,101 +101,120 @@ public class Controller extends KeyAdapter implements ActionListener {
 		}
 	}
 
-	public static class EscAction extends AbstractAction {
+	/**
+	 * public static class EscAction extends AbstractAction {
+	 * 
+	 * 
+	 * public EscAction( String name, Integer mnemonic ) { // constructor }
+	 * 
+	 * @Override public void actionPerformed( ActionEvent e ) { // TODO Auto-generated method stub System.out.println( "Move this to Escape " ); }
+	 * 
+	 *           public static EscAction EscActionFactory() { // TODO Auto-generated method stub return new EscAction( "Escape", new Integer( KeyEvent.VK_ESCAPE ) ); }
+	 * 
+	 *           }
+	 **/
 
-		public EscAction( String name, Integer mnemonic ) {
-			// constructor
-		}
-
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-			// TODO Auto-generated method stub
-			System.out.println( "Move this to Escape " );
-		}
-
-		public static EscAction EscActionFactory() {
-			// TODO Auto-generated method stub
-			return new EscAction( "Escape", new Integer( KeyEvent.VK_ESCAPE ) );
-		}
-
-	}
-
+	@SuppressWarnings ( "serial" )
 	public static class ClearEverythingAction extends AbstractAction {
 
-		public ClearEverythingAction( ) {
+		public ClearEverythingAction() {
 			// constructor
 		}
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
 			// TODO Auto-generated method stub
-			System.out.println( "Clear Everything Action" );
+
+			model.clear( e.getActionCommand() );
+			view.update( model.getValue() );
+			
 		}
 
 		public static ClearEverythingAction ClearEverythingActionFactory() {
-			// TODO Auto-generated method stub
-			//return new ClearEverythingAction( "Clear Everything", new Integer( KeyEvent.VK_ESCAPE ) );
-			return new ClearEverythingAction(  );
+			return new ClearEverythingAction();
 		}
 
 	}
+
 	@SuppressWarnings ( "serial" )
 	public static class ClearAction extends AbstractAction {
 
-		public ClearAction( ) {
+		public ClearAction() {
 			// constructor
 		}
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
 			// TODO Auto-generated method stub
-			System.out.println( "Clear Action" );
+
+			model.clear( e.getActionCommand() );
+			view.update( model.getValue() );
 		}
 
 		public static ClearAction ClearActionFactory() {
 			// TODO Auto-generated method stub
-			return new ClearAction( );
+			return new ClearAction();
 		}
 	}
-	
+
 	@SuppressWarnings ( "serial" )
 	public static class NumberAction extends AbstractAction {
 
-		public NumberAction( ) {
+		public NumberAction() {
 			// constructor
 		}
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
 			// TODO Auto-generated method stub
-			System.out.println( e.getActionCommand() );
-			//System.out.println( "Number Action" );
+			model.HandleNumber( e.getActionCommand() );
+			view.update( model.getValue() );
 		}
 
 		public static NumberAction NumberActionFactory() {
 			// TODO Auto-generated method stub
-			return new NumberAction( );
+			return new NumberAction();
+		}
+	}
+
+	@SuppressWarnings ( "serial" )
+	public static class DotAction extends AbstractAction {
+
+		public DotAction() {
+			// constructor
+		}
+
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			// TODO Auto-generated method stub
+			model.HandleDot();
+			view.update( model.getValue() );
+		}
+
+		public static DotAction DotActionFactory() {
+			// TODO Auto-generated method stub
+			return new DotAction();
 		}
 	}
 
 	@SuppressWarnings ( "serial" )
 	public static class OperatorAction extends AbstractAction {
 
-		public OperatorAction( ) {
+		public OperatorAction() {
 			// constructor
 		}
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
 			// TODO Auto-generated method stub
-			System.out.println( e.getActionCommand() );
+			model.HandleOperator( e.getActionCommand() );
 		}
 
 		public static OperatorAction OperatorActionFactory() {
 			// TODO Auto-generated method stub
-			return new OperatorAction( );
+			return new OperatorAction();
 		}
 
 	}
-	
+
 }
