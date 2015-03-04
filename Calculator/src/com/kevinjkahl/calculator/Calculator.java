@@ -21,7 +21,7 @@ public class Calculator {
 
 		/* register controller as listener */
 		//theView.setController( theController );
-		theView.createActions();
+		theView.createActions(theController);
 
 		/* start it up */
 		theView.CalcView();
