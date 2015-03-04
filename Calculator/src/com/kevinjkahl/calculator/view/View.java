@@ -90,7 +90,6 @@ public class View {
 
 	// Create the application.
 	public View() {
-		createButton();
 		initialize();
 		designButtons();
 	}
