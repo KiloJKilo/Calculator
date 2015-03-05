@@ -1,16 +1,14 @@
 package com.kevinjkahl.calculator.controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 
 import javax.swing.AbstractAction;
-import javax.swing.JButton;
 
 import com.kevinjkahl.calculator.model.Model;
 import com.kevinjkahl.calculator.view.View;
 
-public class Controller extends KeyAdapter implements ActionListener {
+public class Controller extends KeyAdapter {
 
 	// The model of this MVC implementation of a calculator.
 	private static Model model;
@@ -37,7 +35,6 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( true, e.getActionCommand() );
 //			model.clear( e.getActionCommand() );
 //			view.update( model.getDisplayString() );
 //			view.borderChange( false, e.getActionCommand() );
@@ -54,7 +51,6 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( true, e.getActionCommand() );
 //			model.clear( e.getActionCommand() );
 //			view.update( model.getDisplayString() );
 //			view.borderChange( false, e.getActionCommand() );
@@ -69,9 +65,7 @@ public class Controller extends KeyAdapter implements ActionListener {
 	public static class NumberAction extends AbstractAction {
 
 		@Override
-		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( true, e.getActionCommand() );
-			
+		public void actionPerformed( ActionEvent e ) {			
 //			model.HandleNumber( e.getActionCommand() );
 //			view.update( model.getDisplayString() );
 		}
@@ -86,7 +80,6 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( true, e.getActionCommand() );
 //			model.HandleDot();
 //			view.update( model.getDisplayString() );
 //			view.borderChange( false, e.getActionCommand() );
@@ -102,7 +95,6 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( true, e.getActionCommand() );
 //			model.handleOperator( e.getActionCommand() );
 //			view.borderChange( false, e.getActionCommand() );
 		}
@@ -118,7 +110,6 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( true, e.getActionCommand() );
 //			model.calculate();
 //			view.update( model.getDisplayString() );
 //			view.borderChange( false, e.getActionCommand() );
@@ -126,159 +117,6 @@ public class Controller extends KeyAdapter implements ActionListener {
 
 		public static EqualsAction EqualsActionFactory() {
 			return new EqualsAction();
-		}
-
-	}
-
-	@SuppressWarnings ( "serial" )
-	public static class ClearEverythingActionR extends AbstractAction {
-
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( false, e.getActionCommand() );
-		}
-
-		public static ClearEverythingActionR ClearEverythingActionFactoryR() {
-			return new ClearEverythingActionR();
-		}
-
-	}
-
-	@SuppressWarnings ( "serial" )
-	public static class ClearActionR extends AbstractAction {
-
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( false, e.getActionCommand() );
-		}
-
-		public static ClearActionR ClearActionFactoryR() {
-			return new ClearActionR();
-		}
-	}
-
-	@SuppressWarnings ( "serial" )
-	public static class NumberActionR extends AbstractAction {
-
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( false, e.getActionCommand() );
-		}
-
-		public static NumberActionR NumberActionFactoryR() {
-			return new NumberActionR();
-		}
-	}
-
-	@SuppressWarnings ( "serial" )
-	public static class DotActionR extends AbstractAction {
-
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( false, e.getActionCommand() );
-		}
-
-		public static DotActionR DotActionFactoryR() {
-			return new DotActionR();
-		}
-	}
-
-	@SuppressWarnings ( "serial" )
-	public static class OperatorActionR extends AbstractAction {
-
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( false, e.getActionCommand() );
-		}
-
-		public static OperatorActionR OperatorActionFactoryR() {
-			return new OperatorActionR();
-		}
-
-	}
-
-	@SuppressWarnings ( "serial" )
-	public static class EqualsActionR extends AbstractAction {
-
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-			view.borderChange( false, e.getActionCommand() );
-		}
-
-		public static EqualsActionR EqualsActionFactoryR() {
-			return new EqualsActionR();
-		}
-
-	}
-
-	/**
-	 * Handles the events fired from the buttons
-	 */
-	@Override
-	public void actionPerformed( ActionEvent e ) {
-		switch ( e.getActionCommand() ) {
-		case "=":
-			break;
-		case "+":
-		case "-":
-		case "/":
-		case "*":
-			break;
-		case "1":
-		case "2":
-		case "3":
-		case "4":
-		case "5":
-		case "6":
-		case "7":
-		case "8":
-		case "9":
-			break;
-		case "c":
-			System.out.println( "Clear" );
-			break;
-		case "Ce":
-			System.out.println( "Clear Everything" );
-			break;
-		default:
-			break;
-		}
-
-	}//end action performed
-	
-	public class NumberKeyPressedAction extends AbstractAction {
-
-		private final JButton btn;
-		private final boolean pressed;
-
-		public NumberKeyPressedAction( JButton btn, boolean pressed ) {
-			// You could just pass the button model, but this was easier...
-			this.btn = btn;
-			this.pressed = pressed;
-		}
-
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-			if ( pressed ) {
-				btn.getModel().setArmed( pressed );
-				btn.getModel().setPressed( pressed );
-			} else {
-				btn.getModel().setPressed( pressed );
-				btn.getModel().setArmed( pressed );
-			}
-		}
-
-	}//end NumberKeyPressedAction
-	
-	public class NewNumberAction extends AbstractAction {
-
-		public NewNumberAction( String name ) {
-			super( name );
-		}
-
-	@Override
-		public void actionPerformed( ActionEvent e ) {
-			System.out.println( getValue( NAME ) + " was clicked" );
 		}
 
 	}
