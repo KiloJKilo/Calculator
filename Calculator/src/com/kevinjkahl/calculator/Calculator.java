@@ -5,7 +5,7 @@ import com.kevinjkahl.calculator.model.Model;
 import com.kevinjkahl.calculator.view.View;
 
 /**
- * 
+ * @version 1.5
  * 
  * @author Kevin Kahl
  */
@@ -17,13 +17,9 @@ public class Calculator {
 		// create new model, view and controller
 		Model theModel = new Model();
 		View theView = new View();
-		Controller theController = new Controller( theModel, theView );
+		new Controller( theModel, theView );
 
-		/* register controller as listener */
-		//theView.setController( theController );
-		//theView.createActions(theController);
-
-		/* start it up */
+		// start it up
 		theView.CalcView();
 
 	}

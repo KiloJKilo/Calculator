@@ -2,12 +2,6 @@ package com.kevinjkahl.calculator.model;
 
 public class Model {
 
-	// This is the numeric value of the number the user is entering, or the number that was just calculated.
-	private double displayValue;
-
-	// This is the previous value entered or calculated.
-	private double internalValue;
-
 	// This is the String corresponding to what the user is entering
 	private String displayString;
 
@@ -17,17 +11,19 @@ public class Model {
 	// This is true if the next digit entered starts a new value.
 	private String state;
 
-	// This is true if a decimal dot has been entered for the current value.
-	private boolean dot;
-
-	// this holds if the last input was a number or a operator
+	// This holds if the last input was a number or a operator
 	private String lastInput;
 
+	// This holds the first operand number/decimal entered
 	private String firstOperand;
 
+	// This holds the second operand number/decimal entered
 	private String secondOperand;
 
+	// This holds a string representation of the answer
 	private String strAnswer;
+
+	// This holds a double representation of the answer
 	private Double dblAnswer;
 
 	/**
@@ -45,56 +41,80 @@ public class Model {
 	 *            the last operator or last number or clear everything
 	 * 
 	 */
-	public void clear( String clear ) {
+	public void handleClear( String clear ) {
 		if ( clear == "C" ) {
 			// clear last - of operator, clear the operator, if not operator, clear display and set to zero
-			if ( this.getLastInput() == "Operator" ) {
-				System.out.println( "Last Operator Cleared" );
-				this.setOperation( "" );
-			} else {
-				System.out.println( "Last Number Cleared" );
+			if ( getState() == "Operator" ) {
+				setOperation( "" );
+			} else if ( getState() == "First Operand" ) {
+				firstOperand = "0";
+				clearDisplay();
+			} else if ( getState() == "Second Operand" ) {
+				secondOperand = "0";
 				this.clearDisplay();
-				this.HandleNumber( "0" );
 			}
 		} else {
-			// clear everything
 			setToDefault();
-		}// end if operator or number
-	}// end if C
+		}
+	}
 
+	/**
+	 * Method to handle the incoming number/dot. Assign it to the first operand or second, or to add a dot. The last part will start a new operation of the incoming number was during the state of
+	 * answer. Aka, the first thing they did after pressing equals was enter a new number.
+	 *
+	 * @param number
+	 *            the incoming number 0 to 9 or dot.
+	 * 
+	 */
 	public void HandleNumber( String number ) {
 		if ( state == "Start" || state == "First Operand" ) {
-			setFirstOperand( number );
-			setDisplayString( number );
+			if ( number == "." ) {
+				if ( displayString.equals( "" ) ) {
+					displayString = "0";
+					firstOperand += "0";
+				}
+				displayString += ".";
+				firstOperand += ".";
+			} else {
+				setFirstOperand( number );
+				setDisplayString( number );
+			}// end if dot
+
 			setState( "First Operand" );
 		} else if ( state == "Operator" || state == "Second Operand" ) {
-			this.setSecondOperand( number );
-			setDisplayString( number );
+			if ( number == "." ) {
+				if ( displayString.equals( "" ) ) {
+					displayString = "0";
+					secondOperand += "0";
+				}
+				displayString += ".";
+				secondOperand += ".";
+			} else {
+				setSecondOperand( number );
+				setDisplayString( number );
+			}// end if dot
 			setState( "Second Operand" );
 		} else if ( getState() == "Answer" ) {
 			displayString = "0";
-			this.setFirstOperand( number );
-			setDisplayString( number );
+			if ( number == "." ) {
+				if ( displayString.equals( "" ) ) {
+					displayString = "0";
+					firstOperand += "0";
+				}
+				displayString += ".";
+				firstOperand += ".";
+			} else {
+				setFirstOperand( number );
+				setDisplayString( number );
+			}// end if dot
 			setState( "First Operand" );
 		}
 
 	}
 
-	public void HandleDot() {
-		// if ( state ) {
-		// setState( false );
-		// }
-		if ( !dot ) {
-			dot = true;
-			if ( displayString.equals( "" ) ) {
-				displayString = "0";
-
-			}
-			displayString += ".";
-		}
-		lastInput = "Number";
-	}
-
+	/**
+	 * Method to perform calc on first and second operands.
+	 */
 	public void calculate() {
 		clearDisplay();
 		if ( getOperation().equals( "+" ) ) {
@@ -104,7 +124,7 @@ public class Model {
 		} else if ( getOperation().equals( "*" ) ) {
 			dblAnswer = Double.parseDouble( firstOperand ) * Double.parseDouble( secondOperand );
 		} else if ( getOperation().equals( "/" ) ) {
-			if ( displayValue == 0 || displayValue == 0.00 ) {
+			if ( secondOperand == "0" || secondOperand == "0.00" ) {
 
 			} else {
 				dblAnswer = Double.parseDouble( firstOperand ) / Double.parseDouble( secondOperand );
@@ -118,13 +138,16 @@ public class Model {
 		firstOperand = "";
 		secondOperand = "";
 		operation = "";
-		// displayString = "" + displayValue;
-		// internalValue = displayValue;
-		// operation = operator;
-		// state = true;
 	}
 
+	/**
+	 * Method to handle the assignment of the operator
+	 * 
+	 * @param operator
+	 *            incoming operator
+	 */
 	public void handleOperator( String operator ) {
+		//TODO: create the ability to apply a negative sign to a number
 		displayString = "";
 		if ( getState() == "Start" ) {
 			// do nothing
@@ -144,6 +167,9 @@ public class Model {
 		}
 	}
 
+	/**
+	 * Method that calculates a rolling. Aka, when they enter an operand after receiving their answer, as in they want to perform a calculation on the previous answer.
+	 */
 	private void rollingCalculate() {
 		displayString = "";
 		if ( getOperation().equals( "+" ) ) {
@@ -153,7 +179,7 @@ public class Model {
 		} else if ( getOperation().equals( "*" ) ) {
 			dblAnswer = Double.parseDouble( firstOperand ) * Double.parseDouble( secondOperand );
 		} else if ( getOperation().equals( "/" ) ) {
-			if ( displayValue == 0 || displayValue == 0.00 ) {
+			if ( secondOperand == "0" || secondOperand == "0.00" ) {
 
 			} else {
 				dblAnswer = Double.parseDouble( firstOperand ) / Double.parseDouble( secondOperand );
@@ -167,19 +193,22 @@ public class Model {
 
 	}
 
+	/**
+	 * Method to set the variables to a default state.
+	 */
 	private void setToDefault() {
-		displayValue = 0.0;
 		displayString = "0";
-		internalValue = 0;
 		firstOperand = "";
 		secondOperand = "";
 		dblAnswer = 0.0;
 		strAnswer = "";
-		dot = false;
 		setState( "Start" );
 		operation = "";
 	}
 
+	/**
+	 * Method to clear the string associated with the display
+	 */
 	public void clearDisplay() {
 		displayString = "";
 	}

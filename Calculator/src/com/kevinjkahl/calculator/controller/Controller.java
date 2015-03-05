@@ -1,14 +1,13 @@
 package com.kevinjkahl.calculator.controller;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
 
 import javax.swing.AbstractAction;
 
 import com.kevinjkahl.calculator.model.Model;
 import com.kevinjkahl.calculator.view.View;
 
-public class Controller extends KeyAdapter {
+public class Controller {
 
 	// The model of this MVC implementation of a calculator.
 	private static Model model;
@@ -30,95 +29,92 @@ public class Controller extends KeyAdapter {
 
 	}
 
+	/**
+	 * AbstractAction handling the ClearEverything event
+	 */
 	@SuppressWarnings ( "serial" )
 	public static class ClearEverythingAction extends AbstractAction {
 
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-//			model.clear( e.getActionCommand() );
-//			view.update( model.getDisplayString() );
-//			view.borderChange( false, e.getActionCommand() );
+		public ClearEverythingAction( String actionCommand ) {
+			super( actionCommand );
 		}
 
-		public static ClearEverythingAction ClearEverythingActionFactory() {
-			return new ClearEverythingAction();
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			model.handleClear( e.getActionCommand() );
+			view.update( model.getDisplayString() );
 		}
 
 	}
 
+	/**
+	 * AbstractAction handling the Clear event
+	 */
 	@SuppressWarnings ( "serial" )
 	public static class ClearAction extends AbstractAction {
 
+		public ClearAction( String actionCommand ) {
+			super( actionCommand );
+		}
+
 		@Override
 		public void actionPerformed( ActionEvent e ) {
-//			model.clear( e.getActionCommand() );
-//			view.update( model.getDisplayString() );
-//			view.borderChange( false, e.getActionCommand() );
+			model.handleClear( e.getActionCommand() );
+			view.update( model.getDisplayString() );
 		}
 
-		public static ClearAction ClearActionFactory() {
-			return new ClearAction();
-		}
 	}
 
+	/**
+	 * AbstractAction handling the Number event
+	 */
 	@SuppressWarnings ( "serial" )
 	public static class NumberAction extends AbstractAction {
 
-		@Override
-		public void actionPerformed( ActionEvent e ) {			
-//			model.HandleNumber( e.getActionCommand() );
-//			view.update( model.getDisplayString() );
-		}
+		static String name;
 
-		public static NumberAction NumberActionFactory() {
-			return new NumberAction();
+		public NumberAction( String actionCommand ) {
+			super( actionCommand );
 		}
-	}
-
-	@SuppressWarnings ( "serial" )
-	public static class DotAction extends AbstractAction {
 
 		@Override
 		public void actionPerformed( ActionEvent e ) {
-//			model.HandleDot();
-//			view.update( model.getDisplayString() );
-//			view.borderChange( false, e.getActionCommand() );
+			model.HandleNumber( e.getActionCommand() );
+			view.update( model.getDisplayString() );
 		}
 
-		public static DotAction DotActionFactory() {
-			return new DotAction();
-		}
 	}
 
 	@SuppressWarnings ( "serial" )
 	public static class OperatorAction extends AbstractAction {
 
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-//			model.handleOperator( e.getActionCommand() );
-//			view.borderChange( false, e.getActionCommand() );
+		public OperatorAction( String name ) {
+			super( name );
 		}
 
-		public static OperatorAction OperatorActionFactory() {
-			return new OperatorAction();
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			model.handleOperator( e.getActionCommand() );
 		}
 
 	}
 
+	/**
+	 * AbstractAction handling the Equals event
+	 */
 	@SuppressWarnings ( "serial" )
 	public static class EqualsAction extends AbstractAction {
 
-		@Override
-		public void actionPerformed( ActionEvent e ) {
-//			model.calculate();
-//			view.update( model.getDisplayString() );
-//			view.borderChange( false, e.getActionCommand() );
+		public EqualsAction( String actionCommand ) {
+			super( actionCommand );
 		}
 
-		public static EqualsAction EqualsActionFactory() {
-			return new EqualsAction();
+		@Override
+		public void actionPerformed( ActionEvent e ) {
+			model.calculate();
+			view.update( model.getDisplayString() );
 		}
 
 	}
 
-}//end controller
+}
